@@ -27,17 +27,17 @@ tasks.withType<JavaExec>().configureEach {
     jvmArgs = listOf("-Xss4m")
 }
 
-tasks.register("receiver", JavaExec::class, ) {
-    dependsOn(":build")
-    group = "tftp.server"
+tasks.register("receiver", JavaExec::class) {
+    dependsOn(":assemble")
+    group = "tftp-server"
     description = "Runs the TFTP Server"
     mainClass = "com.capital7software.network.tftp.server.TftpServer"
     classpath = sourceSets["main"].runtimeClasspath
 }
 
-tasks.register("sender", JavaExec::class, ) {
-    dependsOn(":build")
-    group = "tftp.client"
+tasks.register("sender", JavaExec::class) {
+    dependsOn(":assemble")
+    group = "tftp-client"
     description = "Runs the TFTP Client. Be sure to pass a file to send with the --args 'full-path-to-file' parameter"
     mainClass = "com.capital7software.network.tftp.client.FileClient"
     classpath = sourceSets["main"].runtimeClasspath
